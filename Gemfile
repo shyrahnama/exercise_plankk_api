@@ -28,7 +28,6 @@ gem 'bootsnap', '>= 1.1.0', require: false
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 gem 'rack-cors'
 
-
 # API Tools
 gem 'fast_jsonapi' #AMS alternative, actively maintained
 #gem 'jwt'
@@ -41,8 +40,8 @@ group :development, :test do
   # Use RSpec gem for specs
   gem 'rspec-rails', '>= 3.5.0'
 
-  # Use Factory Girl gem for test data
-  gem 'factory_girl_rails'
+  # Use Factory Bot gem for test data
+  gem 'factory_bot_rails'
 end
 
 group :development do
