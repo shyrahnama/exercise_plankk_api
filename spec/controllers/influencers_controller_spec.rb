@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe InfluencersController, type: :controller do
+RSpec.describe Api::V1::InfluencersController, type: :controller do
 
   # This should return the minimal set of attributes required to create a valid
   # Influencer. As you add validations to Influencer, be sure to
@@ -58,11 +58,10 @@ RSpec.describe InfluencersController, type: :controller do
       end
 
       it "renders a JSON response with the new influencer" do
-
         post :create, params: {influencer: valid_attributes}, session: valid_session
         expect(response).to have_http_status(:created)
         expect(response.content_type).to eq('application/json')
-        expect(response.location).to eq(influencer_url(Influencer.last))
+        expect(response.location).to eq(v1_influencer_url(Influencer.last))
         expect(JSON.parse(response.body)["data"]["attributes"]["name"]).to eq(valid_attributes[:name])
       end
     end
