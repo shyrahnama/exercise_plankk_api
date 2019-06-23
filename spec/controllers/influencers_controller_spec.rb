@@ -40,7 +40,6 @@ RSpec.describe Api::V1::InfluencersController, type: :controller do
       it { expect(response).to have_http_status(:success) }
       it { expect(JSON.parse(response.body)["data"].length).to eq(2) }
     end
-
   end
 
   describe "GET #show" do
