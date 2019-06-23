@@ -21,15 +21,26 @@ RSpec.describe InfluencersController, type: :controller do
   let!(:influencer) { create(:influencer) }
   let!(:influencer2) { create(:influencer) }
 
+
   before do
     add_authorization_header
   end
 
   describe "GET #index" do
-    before { get :index, params: {}, session: valid_session }
+    context "when not authorized" do
+      before { request.env["HTTP_AUTHORIZATION"] = "abc123" }
+      before { get :index, params: {}, session: valid_session }
 
-    it { expect(response).to have_http_status(:success) }
-    # it { expect(body.dig(:data)[0].dig(:customer, :id)).to eql(invoice.customer_id) }
+      it { expect(response).to have_http_status(:unauthorized) }
+    end
+
+    context "when authorized" do 
+      before { get :index, params: {}, session: valid_session }
+
+      it { expect(response).to have_http_status(:success) }
+      it { expect(JSON.parse(response.body)["data"].length).to eq(2) }
+    end
+
   end
 
   describe "GET #show" do
@@ -38,7 +49,7 @@ RSpec.describe InfluencersController, type: :controller do
     it { expect(response).to be_successful }
   end
 
-  describe "POST #create", focus: true do
+  describe "POST #create" do
     context "with valid params" do
       it "creates a new Influencer" do
         expect {

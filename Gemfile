@@ -30,7 +30,7 @@ gem 'rack-cors'
 
 # API Tools
 gem 'fast_jsonapi' #AMS alternative, actively maintained
-#gem 'jwt'
+gem 'jwt'
 #gem 'versioncake'
 
 group :development, :test do

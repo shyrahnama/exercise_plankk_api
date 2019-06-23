@@ -1,4 +1,5 @@
 class InfluencersController < ApplicationController
+  before_action :authorize_request
   before_action :set_influencer, only: [:show, :update, :destroy]
 
   # GET /influencers
