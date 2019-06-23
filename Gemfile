@@ -37,11 +37,10 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 
-  # Use RSpec gem for specs
+  # Use RSpec gem for specs, FactoryBot instead of fixtures, Shoulda for rspec
   gem 'rspec-rails', '>= 3.5.0'
-
-  # Use Factory Bot gem for test data
   gem 'factory_bot_rails'
+  gem "shoulda-matchers"
 end
 
 group :development do

@@ -22,15 +22,6 @@ module APIErrorResponses
       render_error("Invalid record", 422, messages: e.record.errors&.full_messages)
     end
 
-    def render_errors(errors)
-      errors = errors.to_h.merge(full_messages: errors.try(:full_messages))
-      return render json: { errors: errors }, status: 422
-    end
-
-    def render_error(error_message, code, extras = {})
-      return render json: { error: error_message }.merge(extras) , status: code
-    end
-
     def render_401
       render_error("Unauthorized request", 401)
     end
@@ -39,3 +30,13 @@ module APIErrorResponses
       # Here is where I'd post to Rollbar or a similar tool with a Rollbar.error(e)
       render_error(e.to_s || "Unprocessable entity", 422)
     end
+
+    def render_errors(errors)
+      errors = errors.to_h.merge(full_messages: errors.try(:full_messages))
+      return render json: { errors: errors }, status: 422
+    end
+
+    def render_error(error_message, code, extras = {})
+      return render json: { error: error_message }.merge(extras) , status: code
+    end
+end

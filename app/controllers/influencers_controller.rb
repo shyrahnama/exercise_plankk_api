@@ -3,7 +3,7 @@ class InfluencersController < ApplicationController
 
   # GET /influencers
   def index
-    @influencers = Influencer.all
+    @influencers = InfluencerSerializer.new(Influencer.all)
 
     render json: @influencers
   end
@@ -18,7 +18,7 @@ class InfluencersController < ApplicationController
     @influencer = Influencer.new(influencer_params)
 
     if @influencer.save
-      render json: @influencer, status: :created, location: @influencer
+      render json: InfluencerSerializer.new(@influencer), status: :created, location: @influencer
     else
       render json: @influencer.errors, status: :unprocessable_entity
     end
@@ -27,7 +27,7 @@ class InfluencersController < ApplicationController
   # PATCH/PUT /influencers/1
   def update
     if @influencer.update(influencer_params)
-      render json: @influencer
+      render json: InfluencerSerializer.new(@influencer)
     else
       render json: @influencer.errors, status: :unprocessable_entity
     end
