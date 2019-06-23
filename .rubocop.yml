@@ -1,0 +1,48 @@
+AllCops:
+  TargetRubyVersion:
+    2.6
+  Include:
+    - '**/*.gemspec'
+    - '**/*.podspec'
+    - '**/*.jbuilder'
+    - '**/*.rake'
+    - '**/*.opal'
+    - '**/Gemfile'
+    - '**/Rakefile'
+    - '**/Capfile'
+    - '**/Guardfile'
+    - '**/Podfile'
+    - '**/Thorfile'
+    - '**/Vagrantfile'
+    - '**/Berksfile'
+    - '**/Cheffile'
+    - '**/Vagabondfile'
+    - 'spec/**/*'
+  Exclude:
+    - 'vendor/**/*'
+    - 'spec/fixtures/**/*'
+    - 'bin/**/*'
+    - 'db/**/*'
+    - 'config/**/*'
+  DisplayCopNames: true
+
+Rails:
+  Enabled: true
+
+Layout/EndAlignment:
+  EnforcedStyleAlignWith: variable
+
+Metrics/LineLength:
+  Max: 120
+
+Metrics/BlockLength:
+  Enabled: false
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+
+Security/MarshalLoad:
+  Enabled: false
+
+Bundler/OrderedGems:
+  Enabled: false

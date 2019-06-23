@@ -38,5 +38,7 @@ module PlankkApi
         resource '*', :headers => :any, :methods => [:get, :post, :options]
       end
     end
+
+    config.autoload_paths << Rails.root.join('values')
   end
 end
