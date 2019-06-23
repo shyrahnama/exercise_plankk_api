@@ -4,6 +4,9 @@ FactoryBot.define do
     instagram { "@fitnessphreak_ig" }
     twitter { "@fitness_phreak_tw" }
     birth_date { 35.years.ago }
-    signup_date { Date.yesterday }
+
+    trait :with_signup_date do
+	    signup_date { Date.yesterday }
+	  end
   end
 end
