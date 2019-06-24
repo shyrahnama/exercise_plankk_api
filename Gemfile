@@ -36,6 +36,7 @@ gem 'jwt'
 gem 'rack-reducer', require: 'rack/reducer'
 
 gem 'rswag'
+gem 'rspec-rails', '>= 3.5.0' #This really should not be in prod, but rswag gem seems to need it. 
 
 
 group :development, :test do
@@ -43,7 +44,6 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 
   # Use RSpec gem for specs, FactoryBot instead of fixtures, Shoulda for rspec
-  gem 'rspec-rails', '>= 3.5.0'
   gem 'factory_bot_rails'
   gem "shoulda-matchers"
 
