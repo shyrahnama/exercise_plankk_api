@@ -43,7 +43,8 @@
   * Drying up some of the spec, adding helpers (ex. JSON parse, which I ended up adding)
 
 * Documentation:
-  * Build out documentation
+  * Build out documentation on Swagger a little further (more details, edge cases)
+  * Github README for project setup
 
 * Functional Quality
   * API Versioning (both Controllers and Serializers) - Done
