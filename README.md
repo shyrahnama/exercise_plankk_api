@@ -7,11 +7,12 @@
 * Swagger Documentation with Functional Example Area
 * Unit tests at model, controller, and full stack level
 * TDD-build code base
-* High performance serialization
-* High performance data filtering
+* High performance serialization (using Netflix Serializer)
+* High performance data filtering (using Rack::Reducer)
 * Data Seed file
 * Basic Data Validations, Relationships, Database Constraints (foreign keys, defaults)
 * Deployed to publicly assessible location
+* Console tools & helpers
 
 # Other "Production" Considerations (i.e. what I'd do next if this were going to prod)
 
