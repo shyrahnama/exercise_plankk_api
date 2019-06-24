@@ -38,6 +38,10 @@ gem 'rack-reducer', require: 'rack/reducer'
 gem 'rswag'
 gem 'rspec-rails', '>= 3.5.0' #This really should not be in prod, but rswag gem seems to need it. 
 
+# Console Helpers
+gem 'table_print'
+gem 'awesome_print'
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -46,9 +50,6 @@ group :development, :test do
   # Use RSpec gem for specs, FactoryBot instead of fixtures, Shoulda for rspec
   gem 'factory_bot_rails'
   gem "shoulda-matchers"
-
-  gem 'table_print'
-  gem 'awesome_print'
 end
 
 group :development do
