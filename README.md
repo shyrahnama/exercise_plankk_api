@@ -24,10 +24,11 @@
 * Dev-Ops:
   * Integration to Log Tooling such as paper trail
   * Incorporation of Rollbar for errors
-  * Deploy on AWS ( build Capistrano recipes, use a CI tool)
+  * Deploy on AWS instead of Heroku (primarily a $$ consideration - I chose Heroku because it's easy)
+  * Incorporate a CI tool (along with automatic unit testing and Capistrano-based deployment with successful build)
 
 * Security:
-  * Force SSL!!
+  * Force SSL!! (get a certificate, turn force SSL at Rack layer)
   * Tighten up the CORS rules once we know where the client is
   * Put the behind Cloudflare and add Rack::Attack blocking/throttling middleware (to doubly prevent DDoS attacks)
   * Implement authorization library and user roles (ex. a trainer can't change another trainer's workout)
