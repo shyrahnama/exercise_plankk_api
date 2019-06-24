@@ -7,5 +7,7 @@ module V1
 	  attribute :age do |influencer|
 	  	influencer.age
 	  end
+
+	  has_many :workouts
 	end
 end

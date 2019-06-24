@@ -11,8 +11,12 @@
 module ApiAuthorizationHeader
   # rubocop:disable Metrics/LineLength
   def add_authorization_header
-    access_token = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6InBsYW5ra19hcGlfY2xpZW50IiwiaWF0IjoxNTYxMzE1NjIyfQ.J0n3qCwyDk_KlfiouhB8_k1HKDPbhqeYGT0mNv4_5Vo"
+    access_token = spec_token
     request.env["HTTP_AUTHORIZATION"] = access_token
+  end
+
+  def spec_token
+  	"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6InBsYW5ra19hcGlfY2xpZW50IiwiaWF0IjoxNTYxMzE1NjIyfQ.J0n3qCwyDk_KlfiouhB8_k1HKDPbhqeYGT0mNv4_5Vo"
   end
   # rubocop:enable Metrics/LineLength
 end

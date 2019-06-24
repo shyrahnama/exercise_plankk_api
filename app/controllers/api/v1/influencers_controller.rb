@@ -3,21 +3,29 @@ module Api::V1
     before_action :authorize_request
     before_action :set_influencer, only: [:show, :update, :destroy]
 
-    # GET /api/v1/influencers
+    InfluencerReducer = Rack::Reducer.new(
+      Influencer.all,
+      ->(name:) { where('lower(name) like ?', "%#{name.downcase}%") },
+      ->(instagram:) { where('lower(instagram) like ?', "%#{instagram.downcase}%") },
+      ->(twitter:) { where('lower(twitter) like ?', "%#{twitter.downcase}%") }
+    )
+
+    # GET /v1/influencers
     def index
-      @influencers = ::V1::InfluencerSerializer.new(Influencer.all)
+      @filtered_influencers = InfluencerReducer.apply(params)
+      @influencers = ::V1::InfluencerSerializer.new(@filtered_influencers)
 
       render json: @influencers
     end
 
-    # GET /influencers/1
+    # GET /v1/influencers/1
     def show
       @influencer = ::V1::InfluencerSerializer.new(@influencer)
 
       render json: @influencer
     end
 
-    # POST /api/v1/influencers
+    # POST /v1/influencers
     def create
       @influencer = Influencer.new(influencer_params)
 
@@ -28,7 +36,7 @@ module Api::V1
       end
     end
 
-    # PATCH/PUT /api/v1/influencers/1
+    # PATCH/PUT /v1/influencers/1
     def update
       if @influencer.update(influencer_params)
         render json: ::V1::InfluencerSerializer.new(@influencer)
@@ -37,7 +45,7 @@ module Api::V1
       end
     end
 
-    # DELETE /api/v1/influencers/1
+    # DELETE /v1/influencers/1
     def destroy
       @influencer.destroy
     end

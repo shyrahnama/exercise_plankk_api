@@ -3,19 +3,29 @@ module Api::V1
     before_action :authorize_request
     before_action :set_workout, only: [:show, :update, :destroy]
 
-    # GET /workouts
+    WorkoutReducer = Rack::Reducer.new(
+      Workout.all,
+      ->(title:) { where('lower(title) like ?', "%#{title.downcase}%") },
+      ->(description:) { where('lower(description) like ?', "%#{description.downcase}%") },
+      ->(is_private: 'false') { where('is_private IN (?)', (is_private.present? && is_private == 'any') ? [true, false] : 
+                                                         ((is_private.present? && is_private == 'true') ? [true] : [false])) },
+      ->(influencer_id:) { where('influencer_id = ?', influencer_id) },
+    )
+
+    # GET /v1/workouts
     def index
-      @workouts = ::V1::WorkoutSerializer.new(Workout.all)
+      @filtered_workouts = WorkoutReducer.apply(params)
+      @workouts = ::V1::WorkoutSerializer.new(@filtered_workouts)
 
       render json: @workouts
     end
 
-    # GET /workouts/1
+    # GET /v1/workouts/1
     def show
       render json: ::V1::WorkoutSerializer.new(@workout)
     end
 
-    # POST /workouts
+    # POST /v1/workouts
     def create
       @workout = Workout.new(workout_params)
 
@@ -26,7 +36,7 @@ module Api::V1
       end
     end
 
-    # PATCH/PUT /workouts/1
+    # PATCH/PUT /v1/workouts/1
     def update
       if @workout.update(workout_params)
         render json: ::V1::WorkoutSerializer.new(@workout)
@@ -35,7 +45,7 @@ module Api::V1
       end
     end
 
-    # DELETE /workouts/1
+    # DELETE /v1/workouts/1
     def destroy
       @workout.destroy
     end
