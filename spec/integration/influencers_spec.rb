@@ -4,7 +4,7 @@ require 'swagger_helper'
 describe 'Influencers API' do
 
   path '/v1/influencers' do 
-    get 'Lists influencers' do
+    get 'Lists influencers, with optional search filters' do
       tags 'Influencers'
       consumes 'application/json'
       parameter name: :Authorization, in: :header, type: :string, required: true, description: 'JWT authorization token. Shayan to provide.'
@@ -159,7 +159,7 @@ describe 'Influencers API' do
   end
 
   path '/v1/influencers/{influencer_id}/workouts' do 
-    get 'Lists workouts for a given influencer' do
+    get 'Lists workouts for a given influencer, with optional search filters' do
       tags 'Workouts'
       consumes 'application/json'
       parameter name: :Authorization, in: :header, type: :string, required: true, description: 'JWT authorization token. Shayan to provide.'

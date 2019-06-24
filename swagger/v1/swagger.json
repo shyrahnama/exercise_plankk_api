@@ -7,7 +7,7 @@
   "paths": {
     "/v1/influencers": {
       "get": {
-        "summary": "Lists influencers",
+        "summary": "Lists influencers, with optional search filters",
         "tags": [
           "Influencers"
         ],
@@ -256,7 +256,7 @@
     },
     "/v1/influencers/{influencer_id}/workouts": {
       "get": {
-        "summary": "Lists workouts for a given influencer",
+        "summary": "Lists workouts for a given influencer, with optional search filters",
         "tags": [
           "Workouts"
         ],
@@ -362,7 +362,7 @@
     },
     "/v1/workouts": {
       "get": {
-        "summary": "Lists workouts",
+        "summary": "Lists workouts, with optional search filters",
         "tags": [
           "Workouts"
         ],

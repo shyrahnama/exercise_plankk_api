@@ -4,7 +4,7 @@ require 'swagger_helper'
 describe 'Workouts API' do
 
   path '/v1/workouts' do 
-    get 'Lists workouts' do
+    get 'Lists workouts, with optional search filters' do
       tags 'Workouts'
       consumes 'application/json'
       parameter name: :Authorization, in: :header, type: :string, required: true, description: 'JWT authorization token. Shayan to provide.'
