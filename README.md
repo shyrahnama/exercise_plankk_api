@@ -54,6 +54,7 @@
 
 # Some Choices I made during the exercise
 
+* API Namespace: I chose /v1/{resource}, under the assumption that this will live at a subdomain api.plankk.com
 * CORS -- Chose to allow all origins for now to allow it to be queried live
 * Decided to use the Netflix model serialization Library instead of the standard AMS -- performs better and AMS is no longer being maintained. Also, wanted to learn something new.
   * Faster Performance
