@@ -33,6 +33,9 @@ gem 'fast_jsonapi' #AMS alternative, actively maintained
 gem 'jwt'
 #gem 'versioncake'
 
+gem 'rack-reducer', require: 'rack/reducer'
+
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
@@ -41,6 +44,9 @@ group :development, :test do
   gem 'rspec-rails', '>= 3.5.0'
   gem 'factory_bot_rails'
   gem "shoulda-matchers"
+
+  gem 'table_print'
+  gem 'awesome_print'
 end
 
 group :development do
