@@ -7,6 +7,8 @@
 #   "iat": 1561315622
 # }
 
+# Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6InBsYW5ra19hcGlfY2xpZW50IiwiaWF0IjoxNTYxMzE1NjIyfQ.J0n3qCwyDk_KlfiouhB8_k1HKDPbhqeYGT0mNv4_5Vo
+
 
 module ApiAuthorizationHeader
   # rubocop:disable Metrics/LineLength

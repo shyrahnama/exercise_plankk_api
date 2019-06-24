@@ -21,10 +21,10 @@ RSpec.configure do |config|
       },
       paths: {},
       securityDefinitions: {
-        basic: {
-          type: :http
+        schemes: {
+          type: :bearerAuth
         },
-        http: {
+        bearerAuth: {
           type: :http,
           scheme: 'bearer',
           bearerFormat: :JWT,

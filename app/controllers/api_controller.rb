@@ -15,6 +15,8 @@ class ApiController < ApplicationController
  	    if @current_user != 'plankk_api_client'
  	    	render json: { errors: 'unauthorized JWT token' }, status: :unauthorized
  	    end 
+      # end temporary hack
+
     rescue JWT::DecodeError => e
       render json: { errors: e.message }, status: :unauthorized
     end

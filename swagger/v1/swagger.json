@@ -6,6 +6,108 @@
   },
   "paths": {
     "/v1/influencers": {
+      "get": {
+        "summary": "Lists influencers",
+        "tags": [
+          "Influencers"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string",
+            "required": true,
+            "description": "JWT authorization token. Shayan to provide."
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "type": "string",
+            "required": false,
+            "description": "Filter list of influencers by name"
+          },
+          {
+            "name": "instagram",
+            "in": "query",
+            "type": "string",
+            "required": false,
+            "description": "Filter list of influencers by instagram handle"
+          },
+          {
+            "name": "twitter",
+            "in": "query",
+            "type": "string",
+            "required": false,
+            "description": "Filter list of influencers by twitter handle"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "influencers listed, with filters applied if specified",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer"
+                      },
+                      "type": {
+                        "type": "string"
+                      },
+                      "attributes": {
+                        "type": "object",
+                        "properties": {
+                          "name": {
+                            "type": "string"
+                          },
+                          "instagram": {
+                            "type": "string"
+                          },
+                          "twitter": {
+                            "type": "string"
+                          },
+                          "signup_date": {
+                            "type": "string"
+                          },
+                          "age": {
+                            "type": "integer"
+                          },
+                          "relationships": {
+                            "type": "object",
+                            "properties": {
+                              "workouts": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "integer"
+                                    },
+                                    "type": {
+                                      "type": "string"
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
       "post": {
         "summary": "Creates an influencer",
         "tags": [
@@ -14,14 +116,14 @@
         "consumes": [
           "application/json"
         ],
-        "security": [
-          {
-            "http": [
-
-            ]
-          }
-        ],
         "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string",
+            "required": true,
+            "description": "JWT authorization token"
+          },
           {
             "name": "influencer",
             "in": "body",
@@ -38,7 +140,7 @@
                   "type": "string"
                 },
                 "birth_date": {
-                  "type": "date"
+                  "type": "string"
                 }
               },
               "required": [
@@ -72,14 +174,14 @@
         "produces": [
           "application/json"
         ],
-        "security": [
-          {
-            "http": [
-
-            ]
-          }
-        ],
         "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string",
+            "required": true,
+            "description": "JWT authorization token"
+          },
           {
             "name": "id",
             "in": "path",
@@ -93,13 +195,57 @@
             "schema": {
               "type": "object",
               "properties": {
-                "id": {
-                  "type": "integer"
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer"
+                    },
+                    "type": {
+                      "type": "string"
+                    },
+                    "attributes": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string"
+                        },
+                        "instagram": {
+                          "type": "string"
+                        },
+                        "twitter": {
+                          "type": "string"
+                        },
+                        "signup_date": {
+                          "type": "string"
+                        },
+                        "age": {
+                          "type": "integer"
+                        },
+                        "relationships": {
+                          "type": "object",
+                          "properties": {
+                            "workouts": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "integer"
+                                  },
+                                  "type": {
+                                    "type": "string"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
                 }
-              },
-              "required": [
-                "id"
-              ]
+              }
             }
           },
           "404": {
@@ -107,13 +253,369 @@
           }
         }
       }
+    },
+    "/v1/workouts": {
+      "get": {
+        "summary": "Lists workouts",
+        "tags": [
+          "Workouts"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string",
+            "required": true,
+            "description": "JWT authorization token. Shayan to provide."
+          },
+          {
+            "name": "title",
+            "in": "query",
+            "type": "string",
+            "required": false,
+            "description": "Filter list of workouts by title"
+          },
+          {
+            "name": "description",
+            "in": "query",
+            "type": "string",
+            "required": false,
+            "description": "Filter list of workouts by keywords in description (simple search)"
+          },
+          {
+            "name": "is_private",
+            "in": "query",
+            "type": "string",
+            "required": false,
+            "description": "Filter list by whether workout is public or private. Allowable values are 'any', 'true' or 'false'"
+          },
+          {
+            "name": "influencer_id",
+            "in": "query",
+            "type": "string",
+            "required": false,
+            "description": "Can be in query, but can also be in path as specified in Influencer API"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "workouts are listed, with filters applied if specified",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer"
+                      },
+                      "type": {
+                        "type": "string"
+                      },
+                      "attributes": {
+                        "type": "object",
+                        "properties": {
+                          "title": {
+                            "type": "string"
+                          },
+                          "description": {
+                            "type": "string"
+                          },
+                          "duration_mins": {
+                            "type": "integer"
+                          },
+                          "relationships": {
+                            "type": "object",
+                            "properties": {
+                              "influencer": {
+                                "type": "object",
+                                "properties": {
+                                  "data": {
+                                    "type": "object",
+                                    "properties": {
+                                      "id": {
+                                        "type": "integer"
+                                      },
+                                      "type": {
+                                        "type": "string"
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Creates a workout",
+        "tags": [
+          "Workouts"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string",
+            "required": true,
+            "description": "JWT authorization token. Shayan to provide."
+          },
+          {
+            "name": "workout",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "duration_mins": {
+                  "type": "integer"
+                },
+                "is_private": {
+                  "type": "boolean"
+                },
+                "influencer_id": {
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "title",
+                "duration_mins",
+                "influencer_id"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "workout created"
+          },
+          "401": {
+            "description": "not authorized"
+          },
+          "422": {
+            "description": "invalid request"
+          }
+        }
+      }
+    },
+    "/v1/influencers/{influencer_id}/workouts": {
+      "get": {
+        "summary": "Lists workouts for a given influencer",
+        "tags": [
+          "Workouts"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string",
+            "required": true,
+            "description": "JWT authorization token. Shayan to provide."
+          },
+          {
+            "name": "influencer_id",
+            "in": "path",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "title",
+            "in": "query",
+            "type": "string",
+            "required": false,
+            "description": "Filter list of workouts by title"
+          },
+          {
+            "name": "description",
+            "in": "query",
+            "type": "string",
+            "required": false,
+            "description": "Filter list of workouts by keywords in description (simple search)"
+          },
+          {
+            "name": "is_private",
+            "in": "query",
+            "type": "string",
+            "required": false,
+            "description": "Filter list by whether workout is public or private. Allowable values are 'any', 'true' or 'false'"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "workouts for influencer are returned",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer"
+                      },
+                      "type": {
+                        "type": "string"
+                      },
+                      "attributes": {
+                        "type": "object",
+                        "properties": {
+                          "title": {
+                            "type": "string"
+                          },
+                          "description": {
+                            "type": "string"
+                          },
+                          "duration_mins": {
+                            "type": "integer"
+                          },
+                          "relationships": {
+                            "type": "object",
+                            "properties": {
+                              "influencer": {
+                                "type": "object",
+                                "properties": {
+                                  "data": {
+                                    "type": "object",
+                                    "properties": {
+                                      "id": {
+                                        "type": "integer"
+                                      },
+                                      "type": {
+                                        "type": "string"
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/workouts/{id}": {
+      "get": {
+        "summary": "Retrieves a workout",
+        "tags": [
+          "Workouts"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "type": "string",
+            "required": true,
+            "description": "JWT authorization token. Shayan to provide."
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "workout found",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "type": {
+                      "type": "string"
+                    },
+                    "attributes": {
+                      "type": "object",
+                      "properties": {
+                        "title": {
+                          "type": "string"
+                        },
+                        "description": {
+                          "type": "string"
+                        },
+                        "duration_mins": {
+                          "type": "integer"
+                        },
+                        "relationships": {
+                          "type": "object",
+                          "properties": {
+                            "influencer": {
+                              "type": "object",
+                              "properties": {
+                                "data": {
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "integer"
+                                    },
+                                    "type": {
+                                      "type": "string"
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "workout not found"
+          }
+        }
+      }
     }
   },
   "securityDefinitions": {
-    "basic": {
-      "type": "http"
+    "schemes": {
+      "type": "bearerAuth"
     },
-    "http": {
+    "bearerAuth": {
       "type": "http",
       "scheme": "bearer",
       "bearerFormat": "JWT"
