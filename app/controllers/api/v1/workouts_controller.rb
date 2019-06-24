@@ -22,6 +22,8 @@ module Api::V1
 
     # GET /v1/workouts/1
     def show
+      render_404 unless @workout
+
       render json: ::V1::WorkoutSerializer.new(@workout)
     end
 

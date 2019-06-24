@@ -20,6 +20,7 @@ module Api::V1
 
     # GET /v1/influencers/1
     def show
+      render_404 unless @influencer
       @influencer = ::V1::InfluencerSerializer.new(@influencer)
 
       render json: @influencer

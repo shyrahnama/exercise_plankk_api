@@ -1,0 +1,122 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "API V1",
+    "version": "v1"
+  },
+  "paths": {
+    "/v1/influencers": {
+      "post": {
+        "summary": "Creates an influencer",
+        "tags": [
+          "Influencers"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "security": [
+          {
+            "http": [
+
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "name": "influencer",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "instagram": {
+                  "type": "string"
+                },
+                "twitter": {
+                  "type": "string"
+                },
+                "birth_date": {
+                  "type": "date"
+                }
+              },
+              "required": [
+                "name",
+                "instagram",
+                "twitter",
+                "birth_date"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "influencer created"
+          },
+          "401": {
+            "description": "not authorized"
+          },
+          "422": {
+            "description": "invalid request"
+          }
+        }
+      }
+    },
+    "/v1/influencers/{id}": {
+      "get": {
+        "summary": "Retrieves an influencer",
+        "tags": [
+          "Influencers"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "security": [
+          {
+            "http": [
+
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "influencer found",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "id"
+              ]
+            }
+          },
+          "404": {
+            "description": "influencer not found"
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "basic": {
+      "type": "http"
+    },
+    "http": {
+      "type": "http",
+      "scheme": "bearer",
+      "bearerFormat": "JWT"
+    }
+  }
+}
